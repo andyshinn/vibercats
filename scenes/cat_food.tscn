@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2xy0abc123de"]
+
+[ext_resource type="Script" path="res://scripts/cat_food.gd" id="1_catfood"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_catfood"]
+radius = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_catfood"]
+albedo_color = Color(1, 0.9, 0.2, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_catfood"]
+material = SubResource("StandardMaterial3D_catfood")
+radius = 0.3
+height = 0.6
+
+[node name="CatFood" type="Area3D" groups=["cat_food"]]
+script = ExtResource("1_catfood")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_catfood")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_catfood")
