@@ -4,7 +4,7 @@ extends Camera3D
 ## Follows the player and keeps them centered
 
 @export var target: Node3D
-@export var offset: Vector3 = Vector3(0, 20, 15)
+@export var offset: Vector3 = Vector3(0, 7.5, 7.0)
 @export var smoothing: float = 5.0
 
 func _ready():

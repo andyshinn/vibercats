@@ -33,6 +33,7 @@ func _ready():
 func _physics_process(delta: float):
 	handle_movement(delta)
 	handle_combat(delta)
+	handle_debug_input()
 	move_and_slide()
 
 func handle_movement(delta: float):
@@ -109,3 +110,12 @@ func die():
 	died.emit()
 	# Game over logic will be handled by game manager
 	queue_free()
+
+func handle_debug_input():
+	# Debug: Kill all enemies with Q key
+	if Input.is_action_just_pressed("debug_kill_enemies"):
+		var enemies = get_tree().get_nodes_in_group("enemies")
+		print("DEBUG: Killing ", enemies.size(), " enemies")
+		for enemy in enemies:
+			if is_instance_valid(enemy):
+				enemy.queue_free()

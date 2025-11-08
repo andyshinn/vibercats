@@ -1,3 +1,47 @@
 # Godot 4+ specific ignores
 .godot/
+
+# Godot-specific
+*.translation
+export_presets.cfg
+
+# Imported translations (automatically generated from CSV files)
+*.translation
+
+# Mono-specific ignores (C# projects)
+.mono/
+data_*/
+mono_crash.*.json
+
+# System/tool-specific
+.import/
+*.swp
+*~
+.DS_Store
+
+# Build/export folders
 /android/
+/ios/
+/linux/
+/macos/
+/windows/
+/web/
+/export/
+builds/
+
+# Addons (uncomment if you want to ignore specific addons)
+#addons/*/
+
+# Sensitive or local-only files
+.env
+*.log
+
+# IDE/Editor specific
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Backup files
+*.bak
+*~.nib

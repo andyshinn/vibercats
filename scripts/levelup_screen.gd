@@ -20,6 +20,12 @@ func _ready():
 	skip_button.pressed.connect(_on_skip_pressed)
 	reroll_button.pressed.connect(_on_reroll_pressed)
 
+func _input(event: InputEvent):
+	# Debug: Press E to close level-up screen
+	if visible and Input.is_action_just_pressed("debug_close_levelup"):
+		print("DEBUG: Closing level-up screen with E key")
+		close_screen()
+
 func show_levelup(level: int):
 	level_label.text = "Level " + str(level) + " - Choose a Powerup!"
 	current_powerups = PowerupManager.get_random_powerups(3)

@@ -75,7 +75,7 @@ func _physics_process(delta: float):
 
 	move_and_slide()
 
-func move_towards_target(delta: float):
+func move_towards_target(_delta: float):
 	if not nav_agent:
 		return
 
@@ -103,8 +103,9 @@ func attack_player():
 	if not target or not is_instance_valid(target):
 		return
 
-	if target.has_method("take_damage"):
-		target.take_damage(damage)
+	# Damage disabled for testing
+	# if target.has_method("take_damage"):
+	# 	target.take_damage(damage)
 
 func take_damage(amount: float):
 	current_health -= amount
