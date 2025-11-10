@@ -5,17 +5,36 @@ A cat-themed Survivors-like game similar to Vampire Survivors, Spell Brigade, an
 
 ---
 
-## 📊 Current Status: Phase 1 Complete! 🎮
+## 📊 Current Status: Phase 1 + Weapon System Complete! 🎮⚔️
 
-**Last Updated:** 2025-01-07
+**Last Updated:** 2025-11-08
 
-### Phase 1: Core Gameplay
+### Phase 1: Core Gameplay ✅
 - **Scripts:** 12/12 ✅
 - **Scenes:** 9/9 ✅
 - **Gameplay:** 100% ✅ (Navigation working!)
-- **Status:** Ready for Phase 2
+- **Status:** Complete
 
-### Recent Fixes (2025-01-07)
+### Phase 1 Enhancement: Weapon System ✅
+- **Scripts:** 15/15 ✅ (Added weapon.gd, weapon_manager.gd, updated player.gd, levelup_screen.gd)
+- **Weapons:** 8/8 ✅ (All cat-themed weapons defined)
+- **Unlock System:** ✅ (Levels 6, 12, 18, 21)
+- **Status:** Complete - Ready for Phase 2
+
+### Recent Changes (2025-11-08)
+- ✅ **Implemented Weapon System** - 8 cat-themed weapons with unique attack patterns
+- ✅ **Weapon Manager Singleton** - Manages weapon pool and random selection
+- ✅ **Weapon Unlock System** - Players choose weapons at levels 6, 12, 18, and 21
+- ✅ **Updated Level-Up Screen** - Now handles both powerup and weapon selection
+- ✅ **Player Weapon Integration** - Players can equip and use multiple weapons
+- ✅ **Weapon Types Implemented:**
+  - Melee weapons (Claw Strike, Fish Slap) - functional ✅
+  - Area weapons (Tail Whip, Catnip Bomb) - functional ✅
+  - Projectile weapons (Furball Launcher, Yarn Ball) - placeholder
+  - Beam weapons (Laser Pointer) - placeholder
+  - Summon weapons (Scratching Post) - placeholder
+
+### Previous Fixes (2025-01-07)
 - ✅ Fixed enemy navigation - enemies now properly chase player
 - ✅ Resolved gravity application - moved to main physics loop
 - ✅ Fixed `target_desired_distance` setting (1.5 to match attack range)
@@ -163,19 +182,37 @@ scenes/
       └── powerup_choice.tscn      # Individual powerup display card
 
 scripts/
-  ├── player.gd                    # Player (cat) movement & combat
+  ├── player.gd                    # Player (cat) movement & combat + weapon system
+  ├── player_animation_controller.gd # Cat animation blending (walk/idle)
   ├── enemy.gd                     # Enemy AI
   ├── enemy_spawner.gd             # Spawn management
   ├── cat_food.gd                  # Cat food collection (XP)
   ├── health_component.gd          # Reusable health system
-  ├── player_stats.gd              # Level/hunger tracking
+  ├── player_stats.gd              # Level/hunger tracking (Autoload)
   ├── powerup.gd                   # Cat-themed powerup data resource
-  ├── powerup_manager.gd           # Powerup pool and selection logic
+  ├── powerup_manager.gd           # Powerup pool and selection logic (Autoload)
+  ├── weapon.gd                    # Weapon resource definition (NEW!)
+  ├── weapon_manager.gd            # Weapon pool and selection logic (Autoload, NEW!)
+  ├── data_loader.gd               # JSON data file loader/validator (PLANNED)
+  ├── camera_follow.gd             # Isometric camera controller
+  ├── hud.gd                       # HUD display
+  ├── levelup_screen.gd            # Level-up UI (now handles weapons too!)
+  ├── powerup_choice.gd            # Powerup/weapon card UI
   ├── game_manager.gd              # Global state (difficulty, character choice)
   └── multiplayer/                 # (Phase 3)
       ├── network_manager.gd       # Network setup and Steam integration
       ├── player_sync.gd           # Player state synchronization
       └── lobby_manager.gd         # Lobby and matchmaking
+
+data/                              # JSON data files (PLANNED)
+  ├── weapons.json                 # All weapon definitions
+  ├── powerups.json                # All powerup definitions
+  ├── characters.json              # Cat character definitions
+  ├── balance.json                 # Global balance parameters
+  └── schemas/                     # JSON schemas for validation (optional)
+      ├── weapon_schema.json
+      ├── powerup_schema.json
+      └── character_schema.json
 
 docs/
   └── plan.md                      # This file
@@ -369,19 +406,45 @@ docs/
 
 ## 🔜 Next Steps
 
-### Phase 1 Enhancement: Weapon System
-Before moving to Phase 2, we should implement:
-- **8 cat-themed weapons** with unique mechanics
-- **Weapon selection at levels 6, 12, 18, 21**
-- Integration with existing powerup system
-- Character-specific starting weapons
+### Data-Driven Design Refactor (Recommended Before Phase 2)
+Convert hardcoded weapon and powerup data to JSON for easy editing:
 
-### Phase 2: Menu & Character Systems
-After weapons are complete:
+#### JSON Data Files
+- **data/weapons.json** - All weapon definitions (name, type, damage, cooldown, range, etc.)
+- **data/powerups.json** - All powerup definitions (name, rarity, effects, stacking rules)
+- **data/characters.json** - Cat character definitions (name, starting weapon, stats, portrait)
+- **data/balance.json** - Global balance values (spawn rates, difficulty scaling, XP curves)
+
+#### Benefits
+- **Easy balancing** - Tweak values without touching code
+- **Modding support** - Community can create custom weapons/powerups
+- **Version control friendly** - Balance changes clearly visible in diffs
+- **Designer-friendly** - Non-programmers can adjust game balance
+- **Rapid iteration** - Test different values without recompiling
+
+#### Implementation Notes
+- Use Godot's `JSON.parse_string()` to load data files
+- Create loader scripts (e.g., `scripts/data_loader.gd`) to parse and validate JSON
+- Keep existing Resource classes (`weapon.gd`, `powerup.gd`) but populate from JSON
+- Add JSON schema validation to catch errors early
+- Manager singletons (`WeaponManager`, `PowerupManager`) load from JSON on startup
+
+### Weapon System Polish (Optional)
+After data-driven refactor, consider:
+- **Projectile weapon scenes** - Visual projectiles for Furball Launcher and Yarn Ball
+- **Beam weapon effects** - Laser Pointer visuals and raycast implementation
+- **Turret summons** - Scratching Post turret scene and AI
+- **Weapon visual effects** - Attack animations, particle effects
+- **Weapon upgrade powerups** - Powerups that enhance specific weapon stats
+
+### Phase 2: Menu & Character Systems (Next Priority)
+Now ready to implement:
+- **Title screen** with game start button
+- **Difficulty selection** UI
 - **Multiple playable cat characters** (each with unique starting weapon)
-- Title screen with game start
-- Difficulty selection
-- Character selection UI with cat portraits
-- Settings menu
+  - Use existing cat textures (red, black, grey, bengal, siamese)
+  - Assign different starting weapons to each cat
+- **Character selection screen** with cat portraits
+- **Settings menu** (audio, controls, graphics)
 
-This approach means Phase 2 character selection will be more meaningful, as each cat will have a distinct playstyle based on their starting weapon!
+The weapon system makes Phase 2 character selection meaningful - each cat will have a distinct playstyle based on their starting weapon!

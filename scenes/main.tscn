@@ -1,18 +1,22 @@
-[gd_scene load_steps=13 format=3 uid="uid://chyg5d0nsvxrq"]
+[gd_scene load_steps=18 format=3 uid="uid://chyg5d0nsvxrq"]
 
+[ext_resource type="Texture2D" uid="uid://kvgpqhs5bwgd" path="res://assets/textures/ground/leafy_grass_diff_4k.png" id="1_choun"]
 [ext_resource type="PackedScene" uid="uid://c1wtvl736tsfd" path="res://scenes/player.tscn" id="1_player"]
+[ext_resource type="Texture2D" uid="uid://bx6rcp56dwn" path="res://assets/textures/ground/leafy_grass_nor_gl_4k.png" id="2_eb6dy"]
 [ext_resource type="PackedScene" uid="uid://bqw5g7h8jaj0k" path="res://scenes/enemy.tscn" id="2_enemy"]
 [ext_resource type="Script" uid="uid://c2wnw41wqxjrq" path="res://scripts/camera_follow.gd" id="3_camera"]
+[ext_resource type="Texture2D" uid="uid://dvku1c6pwsdvg" path="res://assets/textures/ground/leafy_grass_arm_4k.png" id="3_trceg"]
 [ext_resource type="Script" uid="uid://ca8s152fr88q7" path="res://scripts/enemy_spawner.gd" id="4_spawner"]
 [ext_resource type="PackedScene" uid="uid://d3efgh456ijk" path="res://scenes/ui/hud.tscn" id="5_hud"]
 [ext_resource type="PackedScene" uid="uid://f5ghikaa0klm" path="res://scenes/ui/levelup_screen.tscn" id="6_levelup"]
 [ext_resource type="PackedScene" uid="uid://h7ijkl012mno" path="res://scenes/environment/tree.tscn" id="7_tree"]
 [ext_resource type="PackedScene" uid="uid://i8jklm123nop" path="res://scenes/environment/rock.tscn" id="8_rock"]
+[ext_resource type="PackedScene" uid="uid://do1j4043dy6k0" path="res://scenes/environment/grass_field.tscn" id="9_85g3d"]
 
 [sub_resource type="Environment" id="Environment_tipki"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_1"]
-vertices = PackedVector3Array(-49, 0.4, -10, -9.75, 0.4, -10, -9.75, 0.4, -10.75, -8.75, 0.4, -11.75, -8, 0.4, -11.75, -8, 0.4, -51, -49, 0.4, -51, -3.75, 0.4, -5.75, -3.75, 0.4, -4.5, -3, 0.4, -4.25, 7, 0.4, -4, -6.5, 0.4, -9, -5.5, 0.4, -6.25, -4.25, 0.4, -6.25, -6.25, 0.4, -10.75, -7.25, 0.4, -11.75, 14.25, 0.4, -9.75, 15, 0.4, -9.75, 15, 0.4, -51, 8.5, 0.4, -4.25, 13.25, 0.4, -7.5, 13.25, 0.4, -8.75, 16.75, 0.4, -8.75, 16.75, 0.4, -8, 49, 0.4, -8, 15.75, 0.4, -9.75, 49, 0.4, -51, -7.25, 0.4, -8.25, -6.25, 0.4, -5.75, -6.25, 0.4, -4.5, -8.75, 0.4, -8.25, -9.75, 0.4, -9.25, -10.75, 0.4, 5.75, -9.5, 0.4, 5.75, -49, 0.4, 7, -11.25, 0.4, 7, 9.25, 0.4, -3.75, 14.25, 0.4, -6.25, 15.75, 0.4, -6.25, 12.75, 0.4, 3.75, 13.25, 0.4, 5, 49, 0.4, 5, 16.75, 0.4, -7.25, 9.25, 0.4, -2.5, 11.5, 0.4, 3.75, -4.25, 0.4, -3.75, -5.75, 0.4, -3.75, -8.75, 0.4, 6.25, -8.75, 0.4, 7.5, 3.25, 0.4, 7.75, 3.25, 0.4, 7.5, 4.25, 0.4, 6.25, 5.5, 0.4, 6.25, 7, 0.4, -2, 6.75, 0.4, 7.5, 11.5, 0.4, 6.25, 10.75, 0.4, 5.75, 10.75, 0.4, 4.25, 8.75, 0.4, -1.75, 6.75, 0.4, 8.75, 12.75, 0.4, 6.25, 5.75, 0.4, 9.75, 5, 0.4, 9.75, 5, 0.4, 47, 49, 0.4, 47, -11.25, 0.4, 7.75, -10, 0.4, 8.25, -49, 0.4, 47, -10, 0.4, 47, 3.25, 0.4, 8.75, -9.25, 0.4, 8.25, 4.25, 0.4, 9.75)
+vertices = PackedVector3Array(-49, 0.5, -10, -9.75, 0.5, -10, -9.75, 0.5, -10.75, -8.75, 0.5, -11.75, -8, 0.5, -11.75, -8, 0.5, -51, -49, 0.5, -51, -3.75, 0.5, -5.75, -3.75, 0.5, -4.5, -3, 0.5, -4.25, 7, 0.5, -4, -6.5, 0.5, -9, -5.5, 0.5, -6.25, -4.25, 0.5, -6.25, -6.25, 0.5, -10.75, -7.25, 0.5, -11.75, 14.25, 0.5, -9.75, 15, 0.5, -9.75, 15, 0.5, -51, 8.5, 0.5, -4.25, 13.25, 0.5, -7.5, 13.25, 0.5, -8.75, 16.75, 0.5, -8.75, 16.75, 0.5, -8, 49, 0.5, -8, 15.75, 0.5, -9.75, 49, 0.5, -51, -7.25, 0.5, -8.25, -6.25, 0.5, -5.75, -6.25, 0.5, -4.5, -8.75, 0.5, -8.25, -9.75, 0.5, -9.25, -10.75, 0.5, 5.75, -9.5, 0.5, 5.75, -49, 0.5, 7, -11.25, 0.5, 7, 9.25, 0.5, -3.75, 14.25, 0.5, -6.25, 15.75, 0.5, -6.25, 12.75, 0.5, 3.75, 13.25, 0.5, 5, 49, 0.5, 5, 16.75, 0.5, -7.25, 9.25, 0.5, -2.5, 11.5, 0.5, 3.75, -4.25, 0.5, -3.75, -5.75, 0.5, -3.75, -8.75, 0.5, 6.25, -8.75, 0.5, 7.5, 3.25, 0.5, 7.75, 3.25, 0.5, 7.5, 4.25, 0.5, 6.25, 5.5, 0.5, 6.25, 7, 0.5, -2, 6.75, 0.5, 7.5, 11.5, 0.5, 6.25, 10.75, 0.5, 5.75, 10.75, 0.5, 4.25, 8.75, 0.5, -1.75, 6.75, 0.5, 8.75, 12.75, 0.5, 6.25, 5.75, 0.5, 9.75, 5, 0.5, 9.75, 5, 0.5, 47, 49, 0.5, 47, -11.25, 0.5, 7.75, -10, 0.5, 8.25, -49, 0.5, 47, -10, 0.5, 47, 3.25, 0.5, 8.75, -9.25, 0.5, 8.25, 4.25, 0.5, 9.75)
 polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Array(2, 0, 3), PackedInt32Array(3, 0, 6), PackedInt32Array(3, 6, 5), PackedInt32Array(8, 7, 9), PackedInt32Array(9, 7, 10), PackedInt32Array(13, 12, 11), PackedInt32Array(13, 11, 7), PackedInt32Array(7, 11, 14), PackedInt32Array(7, 14, 10), PackedInt32Array(16, 15, 17), PackedInt32Array(17, 15, 18), PackedInt32Array(18, 15, 5), PackedInt32Array(21, 20, 19), PackedInt32Array(19, 10, 21), PackedInt32Array(21, 10, 16), PackedInt32Array(16, 10, 14), PackedInt32Array(16, 14, 15), PackedInt32Array(15, 4, 5), PackedInt32Array(24, 23, 22), PackedInt32Array(22, 25, 24), PackedInt32Array(24, 25, 26), PackedInt32Array(26, 25, 18), PackedInt32Array(25, 17, 18), PackedInt32Array(28, 27, 12), PackedInt32Array(12, 27, 11), PackedInt32Array(30, 29, 31), PackedInt32Array(31, 29, 33), PackedInt32Array(31, 33, 32), PackedInt32Array(27, 28, 30), PackedInt32Array(30, 28, 29), PackedInt32Array(31, 32, 1), PackedInt32Array(1, 32, 35), PackedInt32Array(1, 35, 34), PackedInt32Array(1, 34, 0), PackedInt32Array(19, 20, 36), PackedInt32Array(36, 20, 37), PackedInt32Array(39, 38, 40), PackedInt32Array(40, 38, 42), PackedInt32Array(40, 42, 41), PackedInt32Array(41, 42, 24), PackedInt32Array(36, 37, 43), PackedInt32Array(43, 37, 38), PackedInt32Array(43, 38, 44), PackedInt32Array(44, 38, 39), PackedInt32Array(42, 23, 24), PackedInt32Array(45, 8, 9), PackedInt32Array(33, 29, 46), PackedInt32Array(33, 46, 47), PackedInt32Array(47, 46, 45), PackedInt32Array(49, 48, 50), PackedInt32Array(50, 48, 47), PackedInt32Array(50, 47, 45), PackedInt32Array(50, 45, 9), PackedInt32Array(53, 52, 51), PackedInt32Array(51, 50, 53), PackedInt32Array(53, 50, 10), PackedInt32Array(10, 50, 9), PackedInt32Array(56, 55, 54), PackedInt32Array(56, 54, 57), PackedInt32Array(57, 54, 52), PackedInt32Array(57, 52, 44), PackedInt32Array(44, 52, 58), PackedInt32Array(58, 52, 53), PackedInt32Array(58, 43, 44), PackedInt32Array(54, 55, 59), PackedInt32Array(59, 55, 60), PackedInt32Array(63, 62, 61), PackedInt32Array(59, 60, 61), PackedInt32Array(61, 60, 63), PackedInt32Array(63, 60, 41), PackedInt32Array(63, 41, 64), PackedInt32Array(60, 40, 41), PackedInt32Array(34, 35, 65), PackedInt32Array(65, 66, 34), PackedInt32Array(34, 66, 68), PackedInt32Array(34, 68, 67), PackedInt32Array(49, 69, 48), PackedInt32Array(48, 69, 70), PackedInt32Array(71, 62, 63), PackedInt32Array(70, 69, 66), PackedInt32Array(66, 69, 71), PackedInt32Array(66, 71, 68), PackedInt32Array(68, 71, 63)]
 geometry_parsed_geometry_type = 0
 agent_height = 3.0
@@ -25,8 +29,18 @@ filter_walkable_low_height_spans = true
 [sub_resource type="BoxShape3D" id="BoxShape3D_ground"]
 size = Vector3(100, 0.2, 100)
 
-[sub_resource type="BoxMesh" id="BoxMesh_ground"]
-size = Vector3(100, 0.2, 100)
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_ya4ey"]
+albedo_texture = ExtResource("1_choun")
+orm_texture = ExtResource("3_trceg")
+normal_enabled = true
+normal_texture = ExtResource("2_eb6dy")
+uv1_scale = Vector3(8, 8, 8)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_choun"]
+material = SubResource("ORMMaterial3D_ya4ey")
+size = Vector2(100, 100)
+subdivide_width = 1
+subdivide_depth = 1
 
 [node name="Main" type="Node3D"]
 
@@ -38,6 +52,7 @@ shadow_enabled = true
 environment = SubResource("Environment_tipki")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010944366, 0.017604828, 0.007621765)
 navigation_mesh = SubResource("NavigationMesh_1")
 
 [node name="Ground" type="StaticBody3D" parent="NavigationRegion3D"]
@@ -45,9 +60,9 @@ navigation_mesh = SubResource("NavigationMesh_1")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Ground"]
 shape = SubResource("BoxShape3D_ground")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Ground"]
+[node name="GroundPlane" type="MeshInstance3D" parent="NavigationRegion3D/Ground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
-mesh = SubResource("BoxMesh_ground")
+mesh = SubResource("PlaneMesh_choun")
 
 [node name="Tree" parent="NavigationRegion3D" instance=ExtResource("7_tree")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -4.968852)
@@ -85,3 +100,5 @@ enemy_scene = ExtResource("2_enemy")
 [node name="HUD" parent="." instance=ExtResource("5_hud")]
 
 [node name="LevelUpScreen" parent="." instance=ExtResource("6_levelup")]
+
+[node name="GrassField" parent="." instance=ExtResource("9_85g3d")]

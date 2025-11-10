@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://do1j4043dy6k0"]
+
+[ext_resource type="PackedScene" uid="uid://cl6qg1g6fsbob" path="res://scenes/environment/grass_patch.tscn" id="1_ftluw"]
+
+[node name="GrassField" type="Node3D"]
+
+[node name="GrassPatch1" parent="." instance=ExtResource("1_ftluw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 0, -25)
+
+[node name="GrassPatch2" parent="." instance=ExtResource("1_ftluw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 0, 25)
+
+[node name="GrassPatch3" parent="." instance=ExtResource("1_ftluw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, -25)
+
+[node name="GrassPatch4" parent="." instance=ExtResource("1_ftluw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, 25)
