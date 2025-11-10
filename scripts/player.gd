@@ -47,15 +47,43 @@ func _physics_process(delta: float):
 	move_and_slide()
 
 func handle_movement(delta: float):
-	# Get input direction
+	# Get input direction from left stick or WASD
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 
-	# Convert 2D input to 3D direction (accounting for isometric view)
-	var direction = Vector3(input_dir.x, 0, input_dir.y).normalized()
+	# Also check right stick (allow either stick for movement)
+	var right_stick = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 
+	# Debug: Print stick values every 60 frames
+	if Engine.get_process_frames() % 60 == 0:
+		print("Left stick: (%.2f, %.2f) mag=%.2f | Right stick: (%.2f, %.2f) mag=%.2f" % [
+			input_dir.x, input_dir.y, input_dir.length(),
+			right_stick.x, right_stick.y, right_stick.length()
+		])
+
+	# Use whichever stick has more deflection
+	if right_stick.length() > input_dir.length():
+		input_dir = right_stick
+
+	# Get the raw magnitude before normalizing (for proportional speed)
+	var input_magnitude = min(input_dir.length(), 1.0)  # Clamp to max 1.0
+
+	# Get direction (normalized)
+	var direction = Vector3(input_dir.x, 0, input_dir.y)
 	if direction.length() > 0:
-		# Accelerate towards target velocity
-		var target_velocity = direction * move_speed
+		direction = direction.normalized()
+
+	if input_magnitude > 0.01:  # Small deadzone
+		# Speed is proportional to stick deflection
+		# Full deflection = full speed, half deflection = half speed
+		var target_speed = move_speed * input_magnitude
+		var target_velocity = direction * target_speed
+
+		# Debug: Print target speed
+		if Engine.get_process_frames() % 60 == 0:
+			print("Input magnitude: %.2f | Target speed: %.2f | Actual velocity: (%.2f, %.2f)" % [
+				input_magnitude, target_speed, velocity.x, velocity.z
+			])
+
 		velocity.x = move_toward(velocity.x, target_velocity.x, acceleration * delta)
 		velocity.z = move_toward(velocity.z, target_velocity.z, acceleration * delta)
 	else:

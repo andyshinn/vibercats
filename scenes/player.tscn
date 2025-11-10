@@ -17,7 +17,7 @@ shape = SubResource("BoxShape3D_g2els")
 [node name="Camera3DPivot" type="Node3D" parent="."]
 
 [node name="Cat" parent="." instance=ExtResource("2_cat")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 script = null
 
 [node name="AnimationController" type="Node" parent="."]

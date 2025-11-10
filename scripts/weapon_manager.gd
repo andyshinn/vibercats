@@ -3,9 +3,6 @@ extends Node
 ## Singleton managing all available weapons and weapon selection
 ## Autoloaded as "WeaponManager" - accessible globally throughout the game
 
-## Signal emitted when a weapon is unlocked
-signal weapon_unlocked(weapon: Weapon)
-
 ## All available weapons in the game
 var all_weapons: Array[Weapon] = []
 
