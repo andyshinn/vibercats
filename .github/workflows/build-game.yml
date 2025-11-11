@@ -29,19 +29,19 @@ jobs:
 
           - platform: Windows
             runner: ubuntu-latest
-            preset: WindowsDesktop
+            preset: Windows Desktop
             artifact_name: vibercats-windows
             godot_url: https://github.com/godotengine/godot/releases/download/4.5-stable/Godot_v4.5-stable_linux.x86_64.zip
 
           - platform: Linux x86_64
             runner: ubuntu-latest
-            preset: Linuxx86_64
+            preset: Linux x86_64
             artifact_name: vibercats-linux-x86_64
             godot_url: https://github.com/godotengine/godot/releases/download/4.5-stable/Godot_v4.5-stable_linux.x86_64.zip
 
           - platform: Linux arm64
             runner: ubuntu-latest
-            preset: Linuxarm64
+            preset: Linux arm64
             artifact_name: vibercats-linux-arm64
             godot_url: https://github.com/godotengine/godot/releases/download/4.5-stable/Godot_v4.5-stable_linux.x86_64.zip
 
