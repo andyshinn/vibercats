@@ -118,6 +118,7 @@ jobs:
           use_preset_export_path: false
           export_debug: false
           presets_to_export: ${{ matrix.preset }}
+          verbose: true
         env:
           # macOS codesigning environment variables (only used on macOS runner)
           GODOT_MACOS_CODESIGN_CERTIFICATE_FILE: ${{ env.GODOT_MACOS_CODESIGN_CERTIFICATE_FILE }}
