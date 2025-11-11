@@ -26,18 +26,26 @@ jobs:
           lfs: true
 
       - name: Setup macOS certificate
-        if: runner.os == 'Linux' && secrets.GODOT_MACOS_CODESIGN_CERTIFICATE_FILE != ''
+        if: runner.os == 'Linux' && github.event_name != 'pull_request'
         run: |
-          # Create certificate file from base64-encoded secret
-          CERTIFICATE_PATH=$RUNNER_TEMP/macos_certificate.p12
-          echo "${{ secrets.GODOT_MACOS_CODESIGN_CERTIFICATE_FILE }}" | base64 --decode > $CERTIFICATE_PATH
-          echo "GODOT_MACOS_CODESIGN_CERTIFICATE_FILE=$CERTIFICATE_PATH" >> $GITHUB_ENV
+          # Create certificate file from base64-encoded secret if provided
+          if [ -n "${{ secrets.GODOT_MACOS_CODESIGN_CERTIFICATE_FILE }}" ]; then
+            CERTIFICATE_PATH=$RUNNER_TEMP/macos_certificate.p12
+            echo "${{ secrets.GODOT_MACOS_CODESIGN_CERTIFICATE_FILE }}" | base64 --decode > $CERTIFICATE_PATH
+            echo "GODOT_MACOS_CODESIGN_CERTIFICATE_FILE=$CERTIFICATE_PATH" >> $GITHUB_ENV
+            echo "macOS codesigning certificate configured"
+          else
+            echo "No macOS codesigning certificate found - exports will be unsigned"
+          fi
 
           # Create API key file from base64-encoded secret if provided
           if [ -n "${{ secrets.GODOT_MACOS_NOTARIZATION_API_KEY }}" ]; then
             API_KEY_PATH=$RUNNER_TEMP/AuthKey.p8
             echo "${{ secrets.GODOT_MACOS_NOTARIZATION_API_KEY }}" | base64 --decode > $API_KEY_PATH
             echo "GODOT_MACOS_NOTARIZATION_API_KEY=$API_KEY_PATH" >> $GITHUB_ENV
+            echo "macOS notarization API key configured"
+          else
+            echo "No macOS notarization API key found - macOS builds will not be notarized"
           fi
 
       - name: Export game
