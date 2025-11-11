@@ -5,9 +5,9 @@ A cat-themed Survivors-like game similar to Vampire Survivors, Spell Brigade, an
 
 ---
 
-## 📊 Current Status: Phase 1 + Weapon System Complete! 🎮⚔️
+## 📊 Current Status: Phase 1 + Data-Driven Design Complete! 🎮⚔️📊
 
-**Last Updated:** 2025-11-08
+**Last Updated:** 2025-11-10
 
 ### Phase 1: Core Gameplay ✅
 - **Scripts:** 12/12 ✅
@@ -19,9 +19,33 @@ A cat-themed Survivors-like game similar to Vampire Survivors, Spell Brigade, an
 - **Scripts:** 15/15 ✅ (Added weapon.gd, weapon_manager.gd, updated player.gd, levelup_screen.gd)
 - **Weapons:** 8/8 ✅ (All cat-themed weapons defined)
 - **Unlock System:** ✅ (Levels 6, 12, 18, 21)
+- **Status:** Complete
+
+### Data-Driven Design Refactor ✅
+- **Scripts:** 18/18 ✅ (Added data_loader.gd, character.gd, character_manager.gd)
+- **JSON Files:** 4/4 ✅ (weapons.json, powerups.json, balance.json, characters.json)
+- **Integration:** ✅ (All managers load from JSON)
+- **Status:** Complete
+
+### Character System ✅
+- **Characters:** 5/5 ✅ (Whiskers, Shadow, Smokey, Ginger, Luna)
+- **Starting Weapons:** ✅ (Each character has unique starting weapon)
+- **Character Stats:** ✅ (Health and speed vary by character)
+- **Textures:** ✅ (Bengal, Black, Grey, Red, Siamese)
 - **Status:** Complete - Ready for Phase 2
 
-### Recent Changes (2025-11-08)
+### Recent Changes (2025-11-10)
+- ✅ **Character System** - 5 playable cats with unique stats and starting weapons
+- ✅ **Character.gd Resource** - Character data structure with name, texture, stats
+- ✅ **CharacterManager Singleton** - Manages character selection and data
+- ✅ **characters.json** - All character definitions (Whiskers, Shadow, Smokey, Ginger, Luna)
+- ✅ **Data-Driven Design** - All weapons, powerups, characters, and balance values now in JSON
+- ✅ **DataLoader Singleton** - Centralized JSON loading and validation
+- ✅ **JSON Data Files** - weapons.json (8 weapons), powerups.json (12 powerups), balance.json, characters.json (5 cats)
+- ✅ **Manager Updates** - All managers load from JSON at startup
+- ✅ **Easy Tuning** - Balance values can now be tweaked without touching code
+
+### Previous Changes (2025-11-08)
 - ✅ **Implemented Weapon System** - 8 cat-themed weapons with unique attack patterns
 - ✅ **Weapon Manager Singleton** - Manages weapon pool and random selection
 - ✅ **Weapon Unlock System** - Players choose weapons at levels 6, 12, 18, and 21
@@ -191,9 +215,11 @@ scripts/
   ├── player_stats.gd              # Level/hunger tracking (Autoload)
   ├── powerup.gd                   # Cat-themed powerup data resource
   ├── powerup_manager.gd           # Powerup pool and selection logic (Autoload)
-  ├── weapon.gd                    # Weapon resource definition (NEW!)
-  ├── weapon_manager.gd            # Weapon pool and selection logic (Autoload, NEW!)
-  ├── data_loader.gd               # JSON data file loader/validator (PLANNED)
+  ├── weapon.gd                    # Weapon resource definition
+  ├── weapon_manager.gd            # Weapon pool and selection logic (Autoload)
+  ├── character.gd                 # Character resource definition
+  ├── character_manager.gd         # Character pool and selection logic (Autoload)
+  ├── data_loader.gd               # JSON data file loader/validator (Autoload)
   ├── camera_follow.gd             # Isometric camera controller
   ├── hud.gd                       # HUD display
   ├── levelup_screen.gd            # Level-up UI (now handles weapons too!)
@@ -204,15 +230,11 @@ scripts/
       ├── player_sync.gd           # Player state synchronization
       └── lobby_manager.gd         # Lobby and matchmaking
 
-data/                              # JSON data files (PLANNED)
-  ├── weapons.json                 # All weapon definitions
-  ├── powerups.json                # All powerup definitions
-  ├── characters.json              # Cat character definitions
+data/                              # JSON data files ✅
+  ├── weapons.json                 # All weapon definitions (8 weapons)
+  ├── powerups.json                # All powerup definitions (12 powerups)
   ├── balance.json                 # Global balance parameters
-  └── schemas/                     # JSON schemas for validation (optional)
-      ├── weapon_schema.json
-      ├── powerup_schema.json
-      └── character_schema.json
+  └── characters.json              # Cat character definitions (5 cats)
 
 docs/
   └── plan.md                      # This file
@@ -406,31 +428,8 @@ docs/
 
 ## 🔜 Next Steps
 
-### Data-Driven Design Refactor (Recommended Before Phase 2)
-Convert hardcoded weapon and powerup data to JSON for easy editing:
-
-#### JSON Data Files
-- **data/weapons.json** - All weapon definitions (name, type, damage, cooldown, range, etc.)
-- **data/powerups.json** - All powerup definitions (name, rarity, effects, stacking rules)
-- **data/characters.json** - Cat character definitions (name, starting weapon, stats, portrait)
-- **data/balance.json** - Global balance values (spawn rates, difficulty scaling, XP curves)
-
-#### Benefits
-- **Easy balancing** - Tweak values without touching code
-- **Modding support** - Community can create custom weapons/powerups
-- **Version control friendly** - Balance changes clearly visible in diffs
-- **Designer-friendly** - Non-programmers can adjust game balance
-- **Rapid iteration** - Test different values without recompiling
-
-#### Implementation Notes
-- Use Godot's `JSON.parse_string()` to load data files
-- Create loader scripts (e.g., `scripts/data_loader.gd`) to parse and validate JSON
-- Keep existing Resource classes (`weapon.gd`, `powerup.gd`) but populate from JSON
-- Add JSON schema validation to catch errors early
-- Manager singletons (`WeaponManager`, `PowerupManager`) load from JSON on startup
-
-### Weapon System Polish (Optional)
-After data-driven refactor, consider:
+### Weapon System Polish (Optional - Enhancement)
+Visual polish for weapon effects:
 - **Projectile weapon scenes** - Visual projectiles for Furball Launcher and Yarn Ball
 - **Beam weapon effects** - Laser Pointer visuals and raycast implementation
 - **Turret summons** - Scratching Post turret scene and AI

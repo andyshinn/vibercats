@@ -1,0 +1,85 @@
+{
+  "weapons": [
+    {
+      "weapon_id": "claw_strike",
+      "weapon_name": "Claw Strike",
+      "description": "Rapid melee swipes in front of the player. Fast and furious!",
+      "weapon_type": "MELEE",
+      "base_damage": 15.0,
+      "base_cooldown": 0.5,
+      "base_range": 2.0,
+      "base_projectile_speed": 0.0
+    },
+    {
+      "weapon_id": "furball_launcher",
+      "weapon_name": "Furball Launcher",
+      "description": "Shoots bouncing furballs that ricochet off walls.",
+      "weapon_type": "PROJECTILE",
+      "base_damage": 20.0,
+      "base_cooldown": 1.0,
+      "base_range": 10.0,
+      "base_projectile_speed": 8.0
+    },
+    {
+      "weapon_id": "tail_whip",
+      "weapon_name": "Tail Whip",
+      "description": "Spins around dealing damage to all nearby enemies.",
+      "weapon_type": "AREA",
+      "base_damage": 25.0,
+      "base_cooldown": 2.0,
+      "base_range": 3.0,
+      "base_projectile_speed": 0.0
+    },
+    {
+      "weapon_id": "yarn_ball",
+      "weapon_name": "Yarn Ball",
+      "description": "Launches yarn balls that seek out and chase enemies.",
+      "weapon_type": "PROJECTILE",
+      "base_damage": 18.0,
+      "base_cooldown": 1.5,
+      "base_range": 15.0,
+      "base_projectile_speed": 6.0
+    },
+    {
+      "weapon_id": "catnip_bomb",
+      "weapon_name": "Catnip Bomb",
+      "description": "Throws explosive catnip that deals area damage over time.",
+      "weapon_type": "AREA",
+      "base_damage": 30.0,
+      "base_cooldown": 3.0,
+      "base_range": 5.0,
+      "base_projectile_speed": 0.0
+    },
+    {
+      "weapon_id": "laser_pointer",
+      "weapon_name": "Laser Pointer",
+      "description": "Continuous beam that pierces through multiple enemies.",
+      "weapon_type": "BEAM",
+      "base_damage": 12.0,
+      "base_cooldown": 0.3,
+      "base_range": 12.0,
+      "base_projectile_speed": 0.0
+    },
+    {
+      "weapon_id": "fish_slap",
+      "weapon_name": "Fish Slap",
+      "description": "Slaps enemies with a fish, dealing damage and knockback.",
+      "weapon_type": "MELEE",
+      "base_damage": 22.0,
+      "base_cooldown": 1.2,
+      "base_range": 2.5,
+      "base_projectile_speed": 0.0
+    },
+    {
+      "weapon_id": "scratching_post",
+      "weapon_name": "Scratching Post",
+      "description": "Places a stationary turret that automatically attacks nearby enemies.",
+      "weapon_type": "SUMMON",
+      "base_damage": 10.0,
+      "base_cooldown": 8.0,
+      "base_range": 8.0,
+      "base_projectile_speed": 0.0
+    }
+  ],
+  "weapon_unlock_levels": [6, 12, 18, 21]
+}

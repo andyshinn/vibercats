@@ -32,13 +32,55 @@ signal died()
 signal weapon_equipped(weapon: Weapon)
 
 func _ready():
-	current_health = max_health
-	health_changed.emit(current_health, max_health)
+	# Initialize player with selected character
+	call_deferred("_initialize_character")
 
 	# Connect to level-up screen for weapon selection
 	var levelup_screen = get_tree().get_first_node_in_group("levelup_screen")
 	if levelup_screen and levelup_screen.has_signal("weapon_chosen"):
 		levelup_screen.weapon_chosen.connect(_on_weapon_chosen)
+
+## Initialize player stats and appearance based on selected character
+func _initialize_character():
+	var character = CharacterManager.get_selected_character()
+	if character == null:
+		print("Warning: No character selected, using default stats")
+		current_health = max_health
+		health_changed.emit(current_health, max_health)
+		return
+
+	# Apply character stats
+	max_health = character.base_health
+	current_health = max_health
+	move_speed = character.base_speed
+
+	# Apply character texture
+	if character.texture:
+		_apply_character_texture(character.texture)
+
+	# Equip starting weapon
+	if character.starting_weapon_id != "":
+		var starting_weapon = WeaponManager.get_weapon_by_id(character.starting_weapon_id)
+		if starting_weapon:
+			equip_weapon(starting_weapon)
+			print("Equipped starting weapon: ", starting_weapon.weapon_name)
+
+	health_changed.emit(current_health, max_health)
+	print("Playing as: ", character.character_name, " (", character.flavor_text, ")")
+
+## Apply character texture to the player model
+func _apply_character_texture(texture: Texture2D):
+	# Find the MeshInstance3D child node
+	for child in get_children():
+		if child is MeshInstance3D:
+			var mesh_instance = child as MeshInstance3D
+			# Create a new material with the character texture
+			var material = StandardMaterial3D.new()
+			material.albedo_texture = texture
+			material.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST  # Pixel art style
+			mesh_instance.material_override = material
+			print("Applied character texture")
+			break
 
 func _physics_process(delta: float):
 	handle_movement(delta)

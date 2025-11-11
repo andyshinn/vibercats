@@ -1,0 +1,55 @@
+{
+  "characters": [
+    {
+      "character_id": "whiskers",
+      "character_name": "Whiskers",
+      "description": "A swift Bengal cat who strikes fast with deadly claws",
+      "texture_path": "res://assets/textures/cat/bengal.png",
+      "starting_weapon_id": "claw_strike",
+      "base_health": 100.0,
+      "base_speed": 5.0,
+      "flavor_text": "The fastest paws in the west"
+    },
+    {
+      "character_id": "shadow",
+      "character_name": "Shadow",
+      "description": "A mysterious black cat who commands the shadows with area attacks",
+      "texture_path": "res://assets/textures/cat/black.png",
+      "starting_weapon_id": "tail_whip",
+      "base_health": 120.0,
+      "base_speed": 4.5,
+      "flavor_text": "Darkness is her ally"
+    },
+    {
+      "character_id": "smokey",
+      "character_name": "Smokey",
+      "description": "A wise grey cat who prefers ranged combat with yarn balls",
+      "texture_path": "res://assets/textures/cat/grey.png",
+      "starting_weapon_id": "yarn_ball",
+      "base_health": 90.0,
+      "base_speed": 5.5,
+      "flavor_text": "Cunning and precise"
+    },
+    {
+      "character_id": "ginger",
+      "character_name": "Ginger",
+      "description": "A fiery red cat who slaps enemies silly with fish",
+      "texture_path": "res://assets/textures/cat/red.png",
+      "starting_weapon_id": "fish_slap",
+      "base_health": 110.0,
+      "base_speed": 4.8,
+      "flavor_text": "Temperamental but effective"
+    },
+    {
+      "character_id": "luna",
+      "character_name": "Luna",
+      "description": "An elegant Siamese cat with a passion for laser pointers",
+      "texture_path": "res://assets/textures/cat/siamese.png",
+      "starting_weapon_id": "laser_pointer",
+      "base_health": 85.0,
+      "base_speed": 6.0,
+      "flavor_text": "Grace and precision in one package"
+    }
+  ],
+  "default_character": "whiskers"
+}

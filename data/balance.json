@@ -1,0 +1,40 @@
+{
+  "player": {
+    "base_health": 100.0,
+    "base_speed": 5.0,
+    "base_damage": 10.0,
+    "base_attack_cooldown": 1.0,
+    "base_attack_range": 3.0,
+    "xp_magnet_base_range": 5.0
+  },
+  "progression": {
+    "starting_level": 1,
+    "starting_xp": 0,
+    "starting_xp_to_next_level": 10,
+    "xp_curve_multiplier": 1.5
+  },
+  "enemy_spawning": {
+    "initial_spawn_interval": 2.0,
+    "spawn_rate_increase": 0.95,
+    "min_spawn_interval": 0.5,
+    "spawn_distance": 10.0,
+    "max_enemies": 100
+  },
+  "enemy_stats": {
+    "base_health": 30.0,
+    "base_speed": 4.0,
+    "base_damage": 10.0,
+    "attack_cooldown": 1.0,
+    "attack_range": 1.5
+  },
+  "cat_food": {
+    "base_xp_value": 1,
+    "magnet_activation_distance": 5.0,
+    "magnet_pull_speed": 8.0
+  },
+  "levelup_system": {
+    "powerup_choices_per_level": 3,
+    "weapon_unlock_levels": [6, 12, 18, 21],
+    "weapon_choices_per_unlock": 3
+  }
+}
