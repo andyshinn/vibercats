@@ -28,10 +28,10 @@ jobs:
             godot_url: https://github.com/godotengine/godot/releases/download/4.5-stable/Godot_v4.5-stable_macos.universal.zip
 
           - platform: Windows
-            runner: windows-latest
+            runner: ubuntu-latest
             preset: WindowsDesktop
             artifact_name: vibercats-windows
-            godot_url: https://github.com/godotengine/godot/releases/download/4.5-stable/Godot_v4.5-stable_win64.exe.zip
+            godot_url: https://github.com/godotengine/godot/releases/download/4.5-stable/Godot_v4.5-stable_linux.x86_64.zip
 
           - platform: Linux x86_64
             runner: ubuntu-latest
@@ -57,26 +57,46 @@ jobs:
       - name: Setup macOS certificate (macOS only)
         if: matrix.platform == 'macOS' && github.event_name != 'pull_request'
         continue-on-error: true
+        env:
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.GODOT_MACOS_CODESIGN_CERTIFICATE_FILE }}
+          P12_PASSWORD: ${{ secrets.GODOT_MACOS_CODESIGN_CERTIFICATE_PASSWORD }}
+          NOTARIZATION_API_KEY_BASE64: ${{ secrets.GODOT_MACOS_NOTARIZATION_API_KEY }}
         run: |
-          # Create certificate file from base64-encoded secret if provided
-          if [ -n "${{ secrets.GODOT_MACOS_CODESIGN_CERTIFICATE_FILE }}" ]; then
+          # Import code signing certificate into keychain
+          if [ -n "$BUILD_CERTIFICATE_BASE64" ]; then
             echo "Setting up macOS codesigning certificate..."
-            CERTIFICATE_PATH=$RUNNER_TEMP/macos_certificate.p12
-            echo "${{ secrets.GODOT_MACOS_CODESIGN_CERTIFICATE_FILE }}" | base64 --decode > $CERTIFICATE_PATH || {
+
+            # Create variables
+            CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
+            KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+            KEYCHAIN_PASSWORD=$(openssl rand -base64 32)
+
+            # Import certificate from secrets
+            echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH || {
               echo "Warning: Failed to decode certificate - exports will be unsigned"
               exit 0
             }
-            echo "GODOT_MACOS_CODESIGN_CERTIFICATE_FILE=$CERTIFICATE_PATH" >> $GITHUB_ENV
-            echo "macOS codesigning certificate configured"
+
+            # Create temporary keychain
+            security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+            security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+            security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+
+            # Import certificate to keychain
+            security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+            security set-key-partition-list -S apple-tool:,apple: -k "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+            security list-keychain -d user -s $KEYCHAIN_PATH
+
+            echo "macOS codesigning certificate imported into keychain"
           else
             echo "No macOS codesigning certificate found - exports will be unsigned"
           fi
 
           # Create API key file from base64-encoded secret if provided
-          if [ -n "${{ secrets.GODOT_MACOS_NOTARIZATION_API_KEY }}" ]; then
+          if [ -n "$NOTARIZATION_API_KEY_BASE64" ]; then
             echo "Setting up macOS notarization API key..."
             API_KEY_PATH=$RUNNER_TEMP/AuthKey.p8
-            echo "${{ secrets.GODOT_MACOS_NOTARIZATION_API_KEY }}" | base64 --decode > $API_KEY_PATH || {
+            echo -n "$NOTARIZATION_API_KEY_BASE64" | base64 --decode -o $API_KEY_PATH || {
               echo "Warning: Failed to decode API key - macOS builds will not be notarized"
               exit 0
             }
@@ -97,6 +117,7 @@ jobs:
           cache: true
           use_preset_export_path: false
           export_debug: false
+          export_preset_name: ${{ matrix.preset }}
         env:
           # macOS codesigning environment variables (only used on macOS runner)
           GODOT_MACOS_CODESIGN_CERTIFICATE_FILE: ${{ env.GODOT_MACOS_CODESIGN_CERTIFICATE_FILE }}
