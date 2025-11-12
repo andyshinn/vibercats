@@ -35,6 +35,12 @@ builds/
 .env
 *.log
 
+# Code signing and notarization files (never commit these!)
+*.p8
+*.p12
+*.mobileprovision
+notarization_key.json
+
 # IDE/Editor specific
 .vscode/
 .idea/

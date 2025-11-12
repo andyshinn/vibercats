@@ -101,16 +101,16 @@ jobs:
             echo "No macOS codesigning certificate found - exports will be unsigned"
           fi
 
-          # Setup notarization API key
+          # Setup notarization API key (JSON format for rcodesign)
           if [ -n "$NOTARIZATION_API_KEY_BASE64" ]; then
             echo "Setting up macOS notarization API key..."
-            API_KEY_PATH=$RUNNER_TEMP/AuthKey.p8
+            API_KEY_PATH=$RUNNER_TEMP/notarization_key.json
             echo -n "$NOTARIZATION_API_KEY_BASE64" | base64 --decode > $API_KEY_PATH || {
               echo "Warning: Failed to decode API key - macOS builds will not be notarized"
               exit 0
             }
             echo "GODOT_MACOS_NOTARIZATION_API_KEY=$API_KEY_PATH" >> $GITHUB_ENV
-            echo "macOS notarization API key configured"
+            echo "macOS notarization API key configured (JSON format)"
           else
             echo "No macOS notarization API key found - macOS builds will not be notarized"
           fi
@@ -129,13 +129,11 @@ jobs:
           presets_to_export: ${{ matrix.preset }}
           verbose: true
         env:
-          # macOS codesigning environment variables (only used on macOS runner)
+          # macOS codesigning environment variables
           GODOT_MACOS_CODESIGN_CERTIFICATE_FILE: ${{ env.GODOT_MACOS_CODESIGN_CERTIFICATE_FILE }}
           GODOT_MACOS_CODESIGN_CERTIFICATE_PASSWORD: ${{ secrets.GODOT_MACOS_CODESIGN_CERTIFICATE_PASSWORD }}
-          # macOS notarization environment variables (App Store Connect API)
-          GODOT_MACOS_NOTARIZATION_API_UUID: ${{ secrets.GODOT_MACOS_NOTARIZATION_API_UUID }}
+          # macOS notarization environment variables (JSON format for rcodesign)
           GODOT_MACOS_NOTARIZATION_API_KEY: ${{ env.GODOT_MACOS_NOTARIZATION_API_KEY }}
-          GODOT_MACOS_NOTARIZATION_API_KEY_ID: ${{ secrets.GODOT_MACOS_NOTARIZATION_API_KEY_ID }}
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
