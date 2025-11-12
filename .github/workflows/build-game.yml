@@ -134,6 +134,9 @@ jobs:
           GODOT_MACOS_CODESIGN_CERTIFICATE_PASSWORD: ${{ secrets.GODOT_MACOS_CODESIGN_CERTIFICATE_PASSWORD }}
           # macOS notarization environment variables (JSON format for rcodesign)
           GODOT_MACOS_NOTARIZATION_API_KEY: ${{ env.GODOT_MACOS_NOTARIZATION_API_KEY }}
+          GODOT_MACOS_NOTARIZATION_API_KEY_ID: ${{ secrets.GODOT_MACOS_NOTARIZATION_API_KEY_ID }}
+          GODOT_MACOS_NOTARIZATION_API_UUID: ${{ secrets.GODOT_MACOS_NOTARIZATION_API_UUID }}
+
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
